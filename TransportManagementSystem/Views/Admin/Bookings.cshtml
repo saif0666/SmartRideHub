@@ -1,0 +1,70 @@
+﻿@model List<TransportManagementSystem.Models.Booking>
+@using TransportManagementSystem.Models
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 fw-bold text-center">📊 Booking Management</h2>
+
+    <table class="table table-hover shadow">
+        <thead class="table-dark">
+            <tr>
+                <th>User</th>
+                <th>Vehicle</th>
+                <th>Route</th>
+                <th>Fare</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.User.FullName</td>
+                    <td>@booking.Vehicle.ModelName</td>
+                    <td>@booking.Source → @booking.Destination</td>
+                    <td>₹@booking.TotalFare</td>
+
+                    <td>
+                        @if (booking.BookingStatus == BookingStatus.Pending)
+                        {
+                            <span class="badge bg-warning text-dark">
+                                ⏳ Pending
+                            </span>
+                        }
+                        else if (booking.BookingStatus == BookingStatus.Confirmed)
+                        {
+                            <span class="badge bg-primary">
+                                ✅ Confirmed
+                            </span>
+                        }
+                        else if (booking.BookingStatus == BookingStatus.Completed)
+                        {
+                            <span class="badge bg-success">
+                                🚗 Completed
+                            </span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (booking.BookingStatus == BookingStatus.Pending)
+                        {
+                            <a asp-action="ApproveBooking"
+                               asp-route-id="@booking.BookingId"
+                               class="btn btn-sm btn-success">
+                                Approve
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Action</span>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

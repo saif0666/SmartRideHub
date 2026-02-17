@@ -1,0 +1,64 @@
+﻿@model List<TransportManagementSystem.Models.Booking>
+@using TransportManagementSystem.Models
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center fw-bold">🚘 My Ride Dashboard</h2>
+
+    <a asp-action="BookRide" class="btn btn-primary mb-4">
+        + Book New Ride
+    </a>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info shadow">
+            No bookings yet. Start your first ride!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var booking in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 rounded-4 p-3">
+
+                        <h5 class="fw-bold">@booking.Vehicle.ModelName</h5>
+
+                        <p>
+                            <strong>From:</strong> @booking.Source <br />
+                            <strong>To:</strong> @booking.Destination
+                        </p>
+
+                        <p>
+                            <strong>Fare:</strong> ₹@booking.TotalFare
+                        </p>
+
+                        <p>
+                            @if (booking.BookingStatus == BookingStatus.Pending)
+                            {
+                                <span class="badge bg-warning text-dark">
+                                    ⏳ Pending Approval
+                                </span>
+                            }
+                            else if (booking.BookingStatus == BookingStatus.Confirmed)
+                            {
+                                <span class="badge bg-primary">
+                                    🚗 Confirmed
+                                </span>
+                            }
+                            else if (booking.BookingStatus == BookingStatus.Completed)
+                            {
+                                <span class="badge bg-success">
+                                    ✅ Completed
+                                </span>
+                            }
+                        </p>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

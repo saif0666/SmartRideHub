@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Admin Dashboard</h2>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3 mb-4">
+                <h5>Total Bookings</h5>
+                <h3>@ViewBag.TotalBookings</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3 mb-4">
+                <h5>Completed Trips</h5>
+                <h3>@ViewBag.CompletedBookings</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3 mb-4">
+                <h5>Total Drivers</h5>
+                <h3>@ViewBag.TotalDrivers</h3>
+            </div>
+        </div>
+        <hr />
+
+        <h3 class="mt-4">Management Panel</h3>
+
+        <div class="row mt-3">
+
+            <div class="col-md-3">
+                <a asp-controller="Admin" asp-action="Vehicles"
+                   class="btn btn-primary w-100 mb-3">
+                    Manage Vehicles
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a asp-controller="Admin" asp-action="Drivers"
+                   class="btn btn-success w-100 mb-3">
+                    Manage Drivers
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a asp-controller="Admin" asp-action="Bookings"
+                   class="btn btn-warning w-100 mb-3">
+                    Manage Bookings
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a asp-controller="Admin" asp-action="Pricing"
+                   class="btn btn-info w-100 mb-3">
+                    Manage Pricing
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

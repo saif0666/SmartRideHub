@@ -1,0 +1,82 @@
+﻿@model List<TransportManagementSystem.Models.Vehicle>
+@using TransportManagementSystem.Models
+
+@{
+    ViewData["Title"] = "Vehicle Management";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Vehicle Management</h2>
+
+    <!-- Add Vehicle Form -->
+    <div class="card shadow p-4 mb-4">
+        <h4>Add New Vehicle</h4>
+
+        <form asp-action="AddVehicle" method="post">
+
+            <div class="mb-3">
+                <label class="form-label">Model Name</label>
+                <input name="ModelName" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Plate Number</label>
+                <input name="PlateNumber" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Vehicle Type</label>
+                <select name="VehicleType" class="form-control" required>
+                    <option value="">Select Type</option>
+                    @foreach (VehicleType type in Enum.GetValues(typeof(VehicleType)))
+                    {
+                        <option value="@((int)type)">
+                            @type.ToString()
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Add Vehicle
+            </button>
+
+        </form>
+    </div>
+
+    <!-- Vehicle List -->
+    <h4>Existing Vehicles</h4>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No vehicles added yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Plate</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in Model)
+                {
+                    <tr>
+                        <td>@vehicle.ModelName</td>
+                        <td>@vehicle.PlateNumber</td>
+                        <td>@vehicle.VehicleType</td>
+                        <td>@vehicle.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
